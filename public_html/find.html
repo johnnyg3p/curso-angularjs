@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html ng-app>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="lib/angular/angular.js"></script>
+        <script>
+            function meuController($scope) {
+                $scope.title = "AngularJS";
+                $scope.todos = [
+                    {text: "Aprender Angular", done: true},
+                    {text: "Criar aplicacao Angular", done: false},
+                    {text: "Estudar", done: true}
+                ];
+                $scope.remaining = function(){
+                    var count =0;
+                    angular.forEach($scope.todos, function(todo){
+                        count+= todo.done ? 0:1;
+                    });
+                    return count;
+                };
+            }
+
+        </script>
+
+    </head>
+    <body >
+        <div ng-controller="meuController">
+            <h1>{{title}} - {{remaining()}}-faltantes</h1>
+
+            <input type="text" placeholder="filtrar" ng-model="search"/>
+                          
+            <ul ng-repeat="todo in todos | filter:search">
+                <input type="checkbox" ng-model="todo.done"/> 
+                <li>{{todo.text}}</li>
+            </ul> 
+            
+        </div>
+    </body>
+</html>
